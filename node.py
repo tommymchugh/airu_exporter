@@ -2,6 +2,9 @@ import sensor
 import api_base as api
 import urllib.request
 import json
+import ssl
+
+context = ssl._create_unverified_context()
 
 class NodeLocation:
     def __init__(self, lat, long):
@@ -35,7 +38,7 @@ class Node:
         for sensor_type in self.supported_sensors:
             print("Retrieving {} data...".format(sensor_type))
             sensor_url = self.__get_sensor_url(self.node_id, sensor_type, start_dt, end_dt)
-            url_request = urllib.request.urlopen(sensor_url)
+            url_request = urllib.request.urlopen(sensor_url, context=context)
             url_response = url_request.read().decode()
 
             sensor_data_json = json.loads(url_response)["data"]
@@ -45,4 +48,3 @@ class Node:
 
     def __str__(self):
         return "Node ID: {}\nLat: {}\nLong: {}\n".format(self.node_id, self.location.lat, self.location.long)
-        
