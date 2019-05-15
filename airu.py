@@ -50,7 +50,6 @@ def get_nodes_data(nodes, start_dt, end_dt, output_node_file, output_data_file):
         node_item.get_sensors(start_dt, end_dt)
         export_to_csv(node_item, output_node_file, output_data_file)
         node_item.sensors = []
-
         if show_messages:
             print("Retrieved sensor data for node {}\n".format(node_item.node_id))
     return nodes
@@ -78,10 +77,12 @@ def export_to_csv(node_item, output_node_file, output_data_file):
                                   data_item.minute,
                                   data_item.second)
             value = data_item.value
-            data_output.write("{},{},{},{}\n".format(node_id,
+            output_text = "{},{},{},{}\n".format(node_id,
                                                    sensor_type,
                                                    timestamp,
-                                                   value))
+                                                   value)
+            print(output_text)
+            data_output.write(output_text)
 
     node_output.close()
     data_output.close()

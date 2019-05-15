@@ -46,6 +46,7 @@ class Node:
             sensor_data_json = json.loads(url_response)["data"]
             sensor_item = sensor.Sensor(sensor_type, start_dt, end_dt, sensor_data_json)
             self.sensors.append(sensor_item)
+            
             if show_messages:
                 print("Retrieved {} data".format(sensor_type))
 
