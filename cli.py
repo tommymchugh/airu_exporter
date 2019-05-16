@@ -9,7 +9,7 @@ yes_no_answer = "Please use either yes or no for your answer\n"
 every_sensor_answered = False
 export_every_sensor = True
 while every_sensor_answered == False:
-    every_sensor = input("Would you like to export data for every sensor? (yes or no)\n").lower()
+    every_sensor = input("Would you like to export data for every sensor type? (yes or no)\n").lower()
     if every_sensor == "yes" or every_sensor == "no":
         every_sensor_answered = True
         if every_sensor == "no":
