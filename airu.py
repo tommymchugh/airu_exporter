@@ -5,6 +5,7 @@ import json
 import api_base as api
 import ssl
 
+running_cli = False
 show_messages = True
 
 context = ssl._create_unverified_context()
@@ -44,14 +45,14 @@ def get_nodes_data(nodes, start_dt, end_dt, output_node_file, output_data_file):
     data_output.close()
 
     for node_item in nodes:
-        if show_messages:
-            print("Retrieving sensor data for node {}".format(node_item.node_id))
+        if show_messages or running_cli:
+            print("Retrieving sensor data for node: {}.".format(node_item.node_id))
 
         node_item.get_sensors(start_dt, end_dt)
         export_to_csv(node_item, output_node_file, output_data_file)
         node_item.sensors = []
-        if show_messages:
-            print("Retrieved sensor data for node {}\n".format(node_item.node_id))
+        if show_messages or running_cli:
+            print("Retrieved and exported sensor data for node: {}.\n".format(node_item.node_id))
     return nodes
 
 def export_to_csv(node_item, output_node_file, output_data_file):

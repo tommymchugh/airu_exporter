@@ -1,6 +1,7 @@
 import airu
 import time
 airu.show_messages = False
+airu.running_cli = True
 
 print("WELCOME TO THE AIRU EXPORTER CLI")
 print("The following questions will help export the correct data\n")
