@@ -81,7 +81,6 @@ def export_to_csv(node_item, output_node_file, output_data_file):
                                                    sensor_type,
                                                    timestamp,
                                                    value)
-            print(output_text)
             data_output.write(output_text)
 
     node_output.close()
