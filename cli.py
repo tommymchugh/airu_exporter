@@ -1,4 +1,5 @@
 import airu
+import timer
 airu.show_messages = False
 
 print("WELCOME TO THE AIRU EXPORTER CLI")
@@ -92,6 +93,7 @@ while ed_correct == False:
 output_location = input("\nWhat directory would you like to export the data to?\nWe default to the current directory if you do not enter a path.\n")
 
 print("\nBeginning export...")
+start_time = time.time()
 
 if export_every_sensor == False:
     def get_sensor(index):
@@ -121,4 +123,6 @@ if output_location != "":
     airu.output_location_path = output_location
 
 airu.export_node_data(start, end)
-print("Export complete. Enjoy!")
+end_time = time.time()
+total_time = round(end_time-start_time, 2)
+print("Export completed in {} seconds. Enjoy!".format(total_time))
