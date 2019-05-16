@@ -1,5 +1,5 @@
 import airu
-import timer
+import time
 airu.show_messages = False
 
 print("WELCOME TO THE AIRU EXPORTER CLI")
