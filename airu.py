@@ -47,7 +47,8 @@ def get_nodes_data(nodes, start_dt, end_dt, output_node_file, output_data_file):
     for node_item in nodes:
         if show_messages or running_cli:
             print("Retrieving sensor data for node: {}.".format(node_item.node_id))
-
+            if running_cli:
+                node.running_cli = True
         node_item.get_sensors(start_dt, end_dt)
         export_to_csv(node_item, output_node_file, output_data_file)
         node_item.sensors = []

@@ -6,6 +6,7 @@ import ssl
 
 context = ssl._create_unverified_context()
 show_messages = True
+running_cli = False
 
 class NodeLocation:
     def __init__(self, lat, long):
@@ -37,7 +38,7 @@ class Node:
 
     def get_sensors(self, start_dt, end_dt):
         for sensor_type in self.supported_sensors:
-            if show_messages:
+            if show_messages or running_cli:
                 print("Retrieving {} data...".format(sensor_type))
             sensor_url = self.__get_sensor_url(self.node_id, sensor_type, start_dt, end_dt)
             url_request = urllib.request.urlopen(sensor_url, context=context)
@@ -46,8 +47,8 @@ class Node:
             sensor_data_json = json.loads(url_response)["data"]
             sensor_item = sensor.Sensor(sensor_type, start_dt, end_dt, sensor_data_json)
             self.sensors.append(sensor_item)
-            
-            if show_messages:
+
+            if show_messages or running_cli:
                 print("Retrieved {} data".format(sensor_type))
 
     def __str__(self):
